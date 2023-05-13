@@ -31,10 +31,6 @@ Header {
   align-items: flex-end;
 }
 
-.menuIcon {
-  position: relative;
-}
-
 .dropdown {
   position: absolute;
   top: 35px;
@@ -52,8 +48,14 @@ ul {
 li {
   padding: 10px;
   font-size: 18px;
+  display: flex;
+  align-items: stretch;
 }
 
 li:not(:last-child) {
   border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+}
+
+.icon {
+  margin-right: 5px;
 }

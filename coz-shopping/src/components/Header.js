@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Header.css';
 import { RxHamburgerMenu } from "react-icons/rx";
+import { SlPresent, SlStar } from "react-icons/sl";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,8 +22,8 @@ function Header() {
         <div className="dropdown">
           <ul>
             <li>OOO님, 안녕하세요!</li>
-            <li>상품리스트 페이지</li>
-            <li>북마크 페이지</li>
+            <li><SlPresent className="icon"/>상품리스트 페이지</li>
+            <li><SlStar className="icon"/>북마크 페이지</li>
           </ul>
         </div>
         )}
