@@ -1,9 +1,11 @@
 import './App.css';
+import Header from "./components/Header";
+
 
 function App() {
   return (
-    <div>
-      시작하기!
+    <div className='App'>
+      <Header />
     </div>
   );
 }
