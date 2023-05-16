@@ -1,13 +1,20 @@
 import './App.css';
-import Header from "./components/Header";
-import Footer from './components/Footer';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import Main from './pages/Main';
+import ProductList from './pages/ProductList';
+import Bookmark from './pages/Bookmark';
 
 function App() {
   return (
     <div className='App'>
-      <Header />
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/productlist" element={<ProductList />} />
+          <Route path="/bookmark" element={<Bookmark />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

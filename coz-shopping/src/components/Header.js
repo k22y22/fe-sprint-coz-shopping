@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import './Header.css';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { SlPresent, SlStar } from "react-icons/sl";
@@ -13,7 +14,9 @@ function Header() {
   return (
     <header>
       <div className="logoSection">
-        <img className="logoImage" alt="logoImage" src="img/logo.png" />
+        <Link to="/">
+          <img className="logoImage" alt="logoImage" src="img/logo.png" />
+        </Link>
         <h1 className="logoTitle">COZ Shopping</h1>
       </div>
       <div className="menuSection">
@@ -22,8 +25,16 @@ function Header() {
         <div className="dropdown">
           <ul>
             <li>OOO님, 안녕하세요!</li>
-            <li><SlPresent className="icon"/>상품리스트 페이지</li>
-            <li><SlStar className="icon"/>북마크 페이지</li>
+            <li>
+              <Link to="/productlist">
+                <SlPresent className="icon"/> 상품리스트 페이지
+              </Link>
+            </li>
+            <li>
+              <Link to='/bookmark'>
+                <SlStar className="icon"/> 북마크 페이지
+              </Link>
+            </li>
           </ul>
         </div>
         )}
