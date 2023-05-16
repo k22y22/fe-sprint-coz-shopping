@@ -59,3 +59,9 @@ li:not(:last-child) {
 .icon {
   margin-right: 5px;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
