@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Header from '../components/Header'
-import Footer from '../components/Footer';
 import styled, { css }from 'styled-components';
 
 const FilterWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5px 300px;
 `;
 
 const Filter = styled.div`
@@ -94,8 +91,6 @@ function ProductList() {
 
   return (
     <div>
-      <Header />
-
       <FilterWrapper>
         <Filter onClick={() => handleFilterSelection('all')} selected={selectedFilter === 'all'}>
           <img src="img/all.png"></img>
@@ -134,8 +129,6 @@ function ProductList() {
           </ItemCard>
         ))}
       </ItemWrapper>
-
-      <Footer />
     </div>
   );
 }
