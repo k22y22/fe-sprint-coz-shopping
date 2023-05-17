@@ -1,40 +1,7 @@
 import React, { useState, useEffect } from "react";
-import styled, { css }from 'styled-components';
+import styled from 'styled-components';
 import ItemCard from "../components/ItemCard";
-
-const FilterWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Filter = styled.div`
-  height: 115px;
-  margin: 10px;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-
-  ${(props) =>
-    props.selected &&
-    css`
-      color: rgba(65, 45, 212, 1);
-      border-bottom: 3px solid rgba(65, 45, 212, 1);
-    `}
-
-  :hover {
-    color: rgba(65, 45, 212, 1);
-    border-bottom: 3px solid rgba(65, 45, 212, 1);
-  }
-`;
-
-const FilterName = styled.p`
-  font-size: 16px;
-  font-weight: 500;
-  margin-top: 5px;
-`;
+import Filtering from "../components/Filtering";
 
 const ItemWrapper = styled.div`
   display: flex;
@@ -49,19 +16,17 @@ function ProductList() {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [filteredItems, setFilteredItems] = useState([]);
 
+  const FILTERS = {
+    all: () => true,
+    product: (item) => item.type === 'Product',
+    category: (item) => item.type === 'Category',
+    exhibition: (item) => item.type === 'Exhibition',
+    brand: (item) => item.type === 'Brand',
+  };
+
   const handleFilterSelection = (filter) => {
     setSelectedFilter(filter);
-    if (filter === 'all') {
-      setFilteredItems(items);
-    } else if (filter === 'product') {
-      setFilteredItems(items.filter((item) => item.type === 'Product'));
-    } else if (filter === 'category') {
-      setFilteredItems(items.filter((item) => item.type === 'Category'));
-    } else if (filter === 'exhibition') {
-      setFilteredItems(items.filter((item) => item.type === 'Exhibition'));
-    } else if (filter === 'brand') {
-      setFilteredItems(items.filter((item) => item.type === 'Brand'));
-    }
+    setFilteredItems(items.filter(FILTERS[filter]));
   };
 
   useEffect(() => {
@@ -78,31 +43,21 @@ function ProductList() {
     }
   };
 
+  const filters = [
+  { name: '전체', icon: 'img/all.png', filter: 'all' },
+  { name: '상품', icon: 'img/product.png', filter: 'product' },
+  { name: '카테고리', icon: 'img/category.png', filter: 'category' },
+  { name: '기획전', icon: 'img/exhibition.png', filter: 'exhibition' },
+  { name: '브랜드', icon: 'img/brand.png', filter: 'brand' },
+  ];
+
   return (
     <div>
-      <FilterWrapper>
-        <Filter onClick={() => handleFilterSelection('all')} selected={selectedFilter === 'all'}>
-          <img src="img/all.png"></img>
-          <FilterName>전체</FilterName>
-        </Filter>
-        <Filter onClick={() => handleFilterSelection('product')} selected={selectedFilter === 'product'}>
-          <img src="img/product.png"></img>
-          <FilterName>상품</FilterName>
-        </Filter>
-        <Filter onClick={() => handleFilterSelection('category')} selected={selectedFilter === 'category'}>
-          <img src="img/category.png"></img>
-          <FilterName>카테고리</FilterName>
-        </Filter>
-        <Filter onClick={() => handleFilterSelection('exhibition')} selected={selectedFilter === 'exhibition'}>
-          <img src="img/exhibition.png"></img>
-          <FilterName>기획전</FilterName>
-        </Filter>
-        <Filter onClick={() => handleFilterSelection('brand')} selected={selectedFilter === 'brand'}>
-          <img src="img/brand.png"></img>
-          <FilterName>브랜드</FilterName>
-        </Filter>
-      </FilterWrapper>
-
+      <Filtering
+        filters={filters}
+        selectedFilter={selectedFilter}
+        handleFilterSelection={handleFilterSelection}
+      />
       <ItemWrapper>      
         {filteredItems.map((item) => (
           <ItemCard key={item.id} item={item} />
