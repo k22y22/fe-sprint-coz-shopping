@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { css }from 'styled-components';
+import ItemCard from "../components/ItemCard";
 
 const FilterWrapper = styled.div`
   display: flex;
@@ -42,18 +43,6 @@ const ItemWrapper = styled.div`
   flex-wrap: wrap;
   margin: 10px 80px;
 `;
-
-const ItemCard = styled.div`
-  margin-bottom: 5px;
-`;
-
-const ItemImg = styled.img`
-  width: 280px;
-  height: 200px;
-  border-radius: 10px;
-  object-fit: cover;
-`;
-
 
 function ProductList() {
   const [items, setItems] = useState([]);
@@ -116,17 +105,7 @@ function ProductList() {
 
       <ItemWrapper>      
         {filteredItems.map((item) => (
-          <ItemCard key={item.id}>
-            {item.image_url && <ItemImg src={item.image_url} alt={item.title} />}
-            {item.brand_image_url && <ItemImg src={item.brand_image_url} alt={item.brand_name} />}
-
-            {item.title && <p>{item.title}</p>}
-            {item.sub_title && <p>{item.sub_title}</p>}
-            {item.brand_name && <p>{item.brand_name}</p>}
-            {item.price && <p>{item.price}</p>}
-            {item.discountPercentage && <p>{item.discountPercentage}%</p>}
-            {item.follower && <p>{item.follower}</p>}
-          </ItemCard>
+          <ItemCard key={item.id} item={item} />
         ))}
       </ItemWrapper>
     </div>
