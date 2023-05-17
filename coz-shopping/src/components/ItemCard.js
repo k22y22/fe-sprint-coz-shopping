@@ -18,12 +18,12 @@ const ItemInfo = styled.div`
   justify-content: space-between;
 `;
 
-const ItemInfo_left = styled.div`
+const ItemInfoLeft = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const ItemInfo_right = styled.div`
+const ItemInfoRight = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end
@@ -63,13 +63,13 @@ function ItemCard({ item }) {
         <Image src={item.image_url} alt={item.title} />
         <ItemInfo>
           <>
-            <ItemInfo_left>
+            <ItemInfoLeft>
               <Title>{item.title}</Title>
-            </ItemInfo_left>
-            <ItemInfo_right>
+            </ItemInfoLeft>
+            <ItemInfoRight>
               <Discount>{item.discountPercentage}%</Discount>
               <Price>{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Price>
-            </ItemInfo_right>
+            </ItemInfoRight>
           </>
         </ItemInfo>
         </>
@@ -80,9 +80,9 @@ function ItemCard({ item }) {
         <Image src={item.image_url} alt={item.title} />
         <ItemInfo>
           <>
-            <ItemInfo_left>
+            <ItemInfoLeft>
               <Title>#{item.title}</Title>
-            </ItemInfo_left>
+            </ItemInfoLeft>
           </>
         </ItemInfo>
         </>
@@ -93,10 +93,10 @@ function ItemCard({ item }) {
         <Image src={item.image_url} alt={item.title} />
         <ItemInfo>
           <>
-            <ItemInfo_left>
+            <ItemInfoLeft>
               <Title>{item.title}</Title>
               <p>{item.sub_title}</p>
-            </ItemInfo_left>
+            </ItemInfoLeft>
           </>
         </ItemInfo>
         </>
@@ -107,13 +107,13 @@ function ItemCard({ item }) {
         <Image src={item.brand_image_url} alt={item.brand_name} />
         <ItemInfo>
           <>
-            <ItemInfo_left>
+            <ItemInfoLeft>
               <Title>{item.brand_name}</Title>
-            </ItemInfo_left>
-            <ItemInfo_right>
+            </ItemInfoLeft>
+            <ItemInfoRight>
               <P>관심고객수</P>
               <Follwer>{item.follower.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Follwer>
-            </ItemInfo_right>
+            </ItemInfoRight>
           </>
         </ItemInfo>
         </>
