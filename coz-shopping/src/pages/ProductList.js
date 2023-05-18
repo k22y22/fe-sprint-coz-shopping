@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import ItemCard from "../components/ItemCard";
 import Filtering from "../components/Filtering";
+import ItemFetcher from "../api/ItemFetcher";
 
 const ItemWrapper = styled.div`
   display: flex;
@@ -29,20 +30,6 @@ function ProductList() {
     setFilteredItems(items.filter(FILTERS[filter]));
   };
 
-  useEffect(() => {
-    fetchItems();
-  }, []);
-
-  const fetchItems = async () => {
-    try {
-      const response = await fetch('http://cozshopping.codestates-seb.link/api/v1/products');
-      const data = await response.json();
-      setItems(data);
-    } catch (error) {
-      console.error('Error fetching items:', error);
-    }
-  };
-
   const filters = [
   { name: '전체', icon: 'img/all.png', filter: 'all' },
   { name: '상품', icon: 'img/product.png', filter: 'product' },
@@ -52,18 +39,22 @@ function ProductList() {
   ];
 
   return (
-    <div>
-      <Filtering
-        filters={filters}
-        selectedFilter={selectedFilter}
-        handleFilterSelection={handleFilterSelection}
-      />
-      <ItemWrapper>      
-        {filteredItems.map((item) => (
-          <ItemCard key={item.id} item={item} />
-        ))}
-      </ItemWrapper>
-    </div>
+    <ItemFetcher
+      render={(items) => (
+        <div>
+          <Filtering
+            filters={filters}
+            selectedFilter={selectedFilter}
+            handleFilterSelection={handleFilterSelection}
+          />
+          <ItemWrapper>      
+            {items.filter(FILTERS[selectedFilter]).map((item) => (
+              <ItemCard key={item.id} item={item} />
+            ))}
+          </ItemWrapper>
+        </div>
+      )}
+    />
   );
 }
 

@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from 'styled-components';
 import ItemCard from '../components/ItemCard';
+import ItemFetcher from "../api/ItemFetcher";
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,31 +30,19 @@ const ItemWrapper = styled.div`
 `;
 
 function Main() {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    fetchItems();
-  }, []);
-
-  const fetchItems = async () => {
-    try {
-      const response = await fetch('http://cozshopping.codestates-seb.link/api/v1/products');
-      const data = await response.json();
-      setItems(data);
-    } catch (error) {
-      console.error('Error fetching items:', error);
-    }
-  };
+  const renderItems = (items) => (
+    <ItemWrapper>
+      {items.slice(0, 4).map((item) => (
+        <ItemCard key={item.id} item={item} />
+      ))}
+    </ItemWrapper>
+  );
 
   return (
     <Wrapper>
       <ListSection>
         <ListTitle>상품리스트</ListTitle>
-        <ItemWrapper>
-          {items.slice(0, 4).map((item) => (
-            <ItemCard key={item.id} item={item} />
-          ))}
-        </ItemWrapper>
+        <ItemFetcher render={renderItems} />
       </ListSection>
       <ListSection>
         <ListTitle>북마크 리스트</ListTitle>
