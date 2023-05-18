@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { addToBookmark } from '../actions/actions';
+import { BsStarFill } from "react-icons/bs";
 
 const Card = styled.div`
   margin: 10px;
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
 `;
 
 const Image = styled.img`
@@ -10,6 +17,20 @@ const Image = styled.img`
   height: 220px;
   border-radius: 15px;
   object-fit: cover;
+`;
+
+const StyledStar = styled(BsStarFill)`
+  position: absolute;
+  bottom: 12px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  color: ${props => props.filled ? 'gold' : 'lightgray'};
+
+  &:hover {
+    color: gold;
+    cursor: pointer;
+  }
 `;
 
 const ItemInfo = styled.div`
@@ -56,11 +77,25 @@ const Follwer = styled.p`
 `;
 
 function ItemCard({ item }) {
+  const dispatch = useDispatch();
+  const [filled, setFilled] = useState(false);
+
+
+  const handleClick = (e, item) => {
+    e.preventDefault();
+    dispatch(addToBookmark(item));
+    setFilled(!filled);
+    console.log('북마크 추가됨:', item.title, item.brand_name );
+  };
+
   return (
     <Card>
       {item.type === 'Product' && (
         <>
-        <Image src={item.image_url} alt={item.title} />
+        <ImageWrapper>
+          <Image src={item.image_url} alt={item.title} />
+          <StyledStar filled={filled} onClick={(e) => handleClick(e, item)} />
+        </ImageWrapper>
         <ItemInfo>
           <>
             <ItemInfoLeft>
@@ -77,7 +112,10 @@ function ItemCard({ item }) {
 
       {item.type === 'Category' && (
         <>
-        <Image src={item.image_url} alt={item.title} />
+        <ImageWrapper>
+          <Image src={item.image_url} alt={item.title} />
+          <StyledStar filled={filled} onClick={(e) => handleClick(e, item)} />
+        </ImageWrapper>
         <ItemInfo>
           <>
             <ItemInfoLeft>
@@ -90,7 +128,10 @@ function ItemCard({ item }) {
 
       {item.type === 'Exhibition' && (
         <>
-        <Image src={item.image_url} alt={item.title} />
+        <ImageWrapper>
+          <Image src={item.image_url} alt={item.title} />
+          <StyledStar filled={filled} onClick={(e) => handleClick(e, item)} />
+        </ImageWrapper>
         <ItemInfo>
           <>
             <ItemInfoLeft>
@@ -104,7 +145,10 @@ function ItemCard({ item }) {
 
       {item.type === 'Brand' && (
         <>
-        <Image src={item.brand_image_url} alt={item.brand_name} />
+        <ImageWrapper>
+          <Image src={item.brand_image_url} alt={item.title} />
+          <StyledStar filled={filled} onClick={(e) => handleClick(e, item)} />
+        </ImageWrapper>
         <ItemInfo>
           <>
             <ItemInfoLeft>

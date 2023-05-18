@@ -21,4 +21,4 @@ const ItemFetcher = ({ render }) => {
   return render(items);
 };
 
-export default ItemFetcher;
+export default ItemFetcher ;
