@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { addToBookmark } from '../actions/actions';
+import { addToBookmark, removeFromBookmark } from '../actions/actions';
 import { BsStarFill } from "react-icons/bs";
 
 const Card = styled.div`
@@ -83,9 +83,14 @@ function ItemCard({ item }) {
 
   const handleClick = (e, item) => {
     e.preventDefault();
+    if (filled) {
+    // 북마크가 이미 되어 있는 경우 북마크 제거 액션 디스패치
+    dispatch(removeFromBookmark(item));
+  } else {
+    // 북마크가 되어 있지 않은 경우 북마크 추가 액션 디스패치
     dispatch(addToBookmark(item));
-    setFilled(!filled);
-    console.log('북마크 추가됨:', item.title, item.brand_name );
+  }
+  setFilled(!filled);
   };
 
   return (
