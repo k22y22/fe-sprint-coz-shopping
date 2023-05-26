@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Filtering from "../components/Filtering";
-import ItemCard from "../components/ItemCard";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { initialState } from "../reducers/initialState";
 
 const ItemWrapper = styled.div`
   display: flex;
@@ -15,9 +12,6 @@ const ItemWrapper = styled.div`
 
 function Bookmark() {
   const [selectedFilter, setSelectedFilter] = useState("all");
-  const [filteredItems, setFilteredItems] = useState([]);
-  const state = useSelector((state) => state.bookmarkReducer);
-  const { items, bookmarks } = state;
 
   const FILTERS = {
     all: () => true,
@@ -26,10 +20,6 @@ function Bookmark() {
     exhibition: (item) => item.type === "Exhibition",
     brand: (item) => item.type === "Brand",
   };
-
-  useEffect(() => {
-    setFilteredItems(bookmarks.filter(FILTERS[selectedFilter]));
-  }, [bookmarks, selectedFilter]);
 
   const handleFilterSelection = (filter) => {
     setSelectedFilter(filter);
@@ -51,9 +41,7 @@ function Bookmark() {
         handleFilterSelection={handleFilterSelection}
       />
       <ItemWrapper>
-        {filteredItems.map((item) => (
-          <ItemCard key={item.id} item={item} />
-        ))}
+
       </ItemWrapper>
     </div>
   );
