@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { addToBookmark, removeFromBookmark } from '../actions/actions';
-import { BsStarFill } from "react-icons/bs";
+import BookmarkIcon from './BookmarkIcon';
 
 const Card = styled.div`
   margin: 10px;
@@ -17,20 +15,6 @@ const Image = styled.img`
   height: 220px;
   border-radius: 15px;
   object-fit: cover;
-`;
-
-const StyledStar = styled(BsStarFill)`
-  position: absolute;
-  bottom: 12px;
-  right: 10px;
-  width: 24px;
-  height: 24px;
-  color: ${props => props.filled ? 'gold' : 'lightgray'};
-
-  &:hover {
-    color: gold;
-    cursor: pointer;
-  }
 `;
 
 const ItemInfo = styled.div`
@@ -77,21 +61,6 @@ const Follwer = styled.p`
 `;
 
 function ItemCard({ item }) {
-  const dispatch = useDispatch();
-  const [filled, setFilled] = useState(false);
-
-
-  const handleClick = (e, item) => {
-    e.preventDefault();
-    if (filled) {
-    // 북마크가 이미 되어 있는 경우 북마크 제거 액션 디스패치
-    dispatch(removeFromBookmark(item));
-  } else {
-    // 북마크가 되어 있지 않은 경우 북마크 추가 액션 디스패치
-    dispatch(addToBookmark(item));
-  }
-  setFilled(!filled);
-  };
 
   return (
     <Card>
@@ -99,7 +68,7 @@ function ItemCard({ item }) {
         <>
         <ImageWrapper>
           <Image src={item.image_url} alt={item.title} />
-          <StyledStar filled={filled} onClick={(e) => handleClick(e, item)} />
+          <BookmarkIcon />
         </ImageWrapper>
         <ItemInfo>
           <>
@@ -119,7 +88,7 @@ function ItemCard({ item }) {
         <>
         <ImageWrapper>
           <Image src={item.image_url} alt={item.title} />
-          <StyledStar filled={filled} onClick={(e) => handleClick(e, item)} />
+          <BookmarkIcon />
         </ImageWrapper>
         <ItemInfo>
           <>
@@ -135,7 +104,7 @@ function ItemCard({ item }) {
         <>
         <ImageWrapper>
           <Image src={item.image_url} alt={item.title} />
-          <StyledStar filled={filled} onClick={(e) => handleClick(e, item)} />
+          <BookmarkIcon />
         </ImageWrapper>
         <ItemInfo>
           <>
@@ -152,7 +121,7 @@ function ItemCard({ item }) {
         <>
         <ImageWrapper>
           <Image src={item.brand_image_url} alt={item.title} />
-          <StyledStar filled={filled} onClick={(e) => handleClick(e, item)} />
+          <BookmarkIcon />
         </ImageWrapper>
         <ItemInfo>
           <>

@@ -10,7 +10,7 @@ const ItemWrapper = styled.div`
   margin: 10px 80px;
 `;
 
-function Bookmark() {
+function BookmarkPage() {
   const [selectedFilter, setSelectedFilter] = useState("all");
 
   const FILTERS = {
@@ -47,4 +47,4 @@ function Bookmark() {
   );
 }
 
-export default Bookmark;
+export default BookmarkPage;
