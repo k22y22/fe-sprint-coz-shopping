@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from 'styled-components';
 import ItemCard from "../components/ItemCard";
 import Filtering from "../components/Filtering";
-import ItemFetcher from "../api/ItemFetcher";
+import DataFetcher from "../api/DataFetcher";
 
 const ItemWrapper = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ function ProductList() {
   ];
 
   return (
-    <ItemFetcher
+    <DataFetcher
       render={(items) => (
         <div>
           <Filtering

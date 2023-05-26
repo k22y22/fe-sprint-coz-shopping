@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import ItemCard from '../components/ItemCard';
-import ItemFetcher from "../api/ItemFetcher";
+import DataFetcher from "../api/DataFetcher";
 
 
 const Wrapper = styled.div`
@@ -42,7 +42,7 @@ function Main() {
     <Wrapper>
       <ListSection>
         <ListTitle>상품리스트</ListTitle>
-        <ItemFetcher render={renderItems} />
+        <DataFetcher render={renderItems} />
       </ListSection>
       <ListSection>
         <ListTitle>북마크 리스트</ListTitle>

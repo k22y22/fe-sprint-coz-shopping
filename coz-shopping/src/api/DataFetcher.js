@@ -1,6 +1,6 @@
 import  { useState, useEffect } from "react";
 
-const ItemFetcher = ({ render }) => {
+const DataFetcher = ({ render }) => {
 
   const [items, setItems] = useState([]);
 
@@ -21,4 +21,4 @@ const ItemFetcher = ({ render }) => {
   return render(items);
 };
 
-export default ItemFetcher ;
+export default DataFetcher ;

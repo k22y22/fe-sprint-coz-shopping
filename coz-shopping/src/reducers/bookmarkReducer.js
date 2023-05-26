@@ -1,7 +1,6 @@
 import { ADD_TO_BOOKMARK, REMOVE_FROM_BOOKMARK } from "../actions/actions";
 import { initialState } from "./initialState";
 
-
 const bookmarkReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_BOOKMARK:
